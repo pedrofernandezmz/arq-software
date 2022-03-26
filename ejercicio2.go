@@ -3,15 +3,16 @@ package main
 
 import (
 	"encoding/json"
-	//"errors"
+	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
 type Categories []Category
-
 type Category struct {
+	//type Categories []struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
@@ -19,26 +20,29 @@ type Category struct {
 func main() {
 	cats, err := GetCategories("MLA")
 	if err != nil {
-		//validar
+		fmt.Println("Error:", err.Error())
+		return
 	}
-	fmt.Println("las categorias de MLA son...")
+	fmt.Println("Las categorias de MLA son...")
+	for i := 0; i < len(cats); i++ {
+		fmt.Println("Id:", cats[i].ID)
+		fmt.Println("Name:", cats[i].Name, "\n")
+	}
 }
 
 func GetCategories(siteID string) (Categories, error) {
-	response := http.Get("https://api.mercadolibre.com/sites/MLA/categories")                    //completar
-	bytes := ioutil.ReadAll(response.Bytes) //completar
+	response, err := http.Get("https://api.mercadolibre.com/sites/MLA/categories")
+	categories := Categories{}
+	if err != nil {
+		err := errors.New("404")
+		return categories, err
+	} //completar
+	bytes, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	} //completar
 	var cats Categories
-	err := json.Unmarshal(bytes, &cats)
+	err = json.Unmarshal(bytes, &cats)
 	return cats, nil
 
 }
-
-Dentro de la carpeta arq-spftware
-git init
-git remote add origin https:kjsfhalkjshfkhf
-git status
-git checkout -b wj-go-http
-git branch?
-ad commit etc
-git push -u origin ej-go-http
-
