@@ -6,5 +6,5 @@ import(
 ) 
 
 func main() {
-    fmt.Println(Division(8,0))
+    fmt.Println(div.Division(8,2))
 }
