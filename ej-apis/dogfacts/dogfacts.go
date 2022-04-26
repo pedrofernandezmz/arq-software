@@ -10,9 +10,7 @@ import (
 
 type Dogfacts []Dogfact
 type Dogfact struct {
-	//type Categories []struct {
 	Fact   string `json:"fact"`
-	//Name string `json:"name"`
 }
 
 func GetDogfacts(siteID string) (Dogfacts, error) {
@@ -21,11 +19,11 @@ func GetDogfacts(siteID string) (Dogfacts, error) {
 	if err != nil {
 		err := errors.New("404")
 		return dogfacts, err
-	} //completar
+	}
 	bytes, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal(err)
-	} //completar
+	}
 	var facts Dogfacts
 	err = json.Unmarshal(bytes, &facts)
 	return facts, nil
