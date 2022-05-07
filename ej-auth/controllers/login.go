@@ -1,10 +1,11 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/pedrofernandezmz/arq-software/ej-auth/domain"
 	"github.com/pedrofernandezmz/arq-software/ej-auth/services"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func Login(c *gin.Context) {
